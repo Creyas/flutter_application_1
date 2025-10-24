@@ -17,7 +17,7 @@ class App extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(top: 12.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 OrderItemDisplay(3, 'BLT'),
@@ -44,7 +44,6 @@ class OrderItemDisplay extends StatelessWidget {
     return Container(
       width: 250,
       height: 100,
-      margin: const EdgeInsets.all(8),
       color: Colors.blue,
       alignment: Alignment.center,
       child: Text(
