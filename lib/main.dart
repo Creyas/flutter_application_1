@@ -75,9 +75,11 @@ class _OrderScreenState extends State<OrderScreen> {
               child: TextField(
                 controller: _noteController,
                 decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
                   labelText: 'Notes',
                   hintText: 'e.g., no onions, extra pickles',
                 ),
+                keyboardType: TextInputType.text,
               ),
             ),
             if (_note.isNotEmpty) Text('Current note: $_note'),
