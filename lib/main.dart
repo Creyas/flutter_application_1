@@ -80,6 +80,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 ),
               ),
             ),
+            if (_note.isNotEmpty) Text('Current note: $_note'),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
