@@ -86,20 +86,13 @@ class _OrderScreenState extends State<OrderScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
+                StyledButton(
                   onPressed: _increaseQuantity,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    foregroundColor: Colors.deepOrange,
-                  ),
                   child: const Text('Add'),
                 ),
-                ElevatedButton(
+                const SizedBox(width: 12),
+                StyledButton(
                   onPressed: _decreaseQuantity,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    foregroundColor: Colors.deepOrange,
-                  ),
                   child: const Text('Remove'),
                 ),
               ],
@@ -120,5 +113,25 @@ class OrderItemDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}');
+  }
+}
+
+/// Small styled button used across the screen.
+class StyledButton extends StatelessWidget {
+  final VoidCallback? onPressed;
+  final Widget child;
+
+  const StyledButton({super.key, required this.onPressed, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.deepOrange,
+      ),
+      child: child,
+    );
   }
 }
