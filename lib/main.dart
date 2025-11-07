@@ -88,10 +88,18 @@ class _OrderScreenState extends State<OrderScreen> {
               children: [
                 ElevatedButton(
                   onPressed: _increaseQuantity,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.deepOrange,
+                  ),
                   child: const Text('Add'),
                 ),
                 ElevatedButton(
                   onPressed: _decreaseQuantity,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.deepOrange,
+                  ),
                   child: const Text('Remove'),
                 ),
               ],
