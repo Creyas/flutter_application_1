@@ -29,9 +29,6 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   int _quantity = 0;
-  final TextEditingController _noteController = TextEditingController();
-  String _note = '';
-  SandwichSize _selectedSize = SandwichSize.footlong;
 
   void _increaseQuantity() {
     if (_quantity < widget.maxQuantity) {
@@ -46,81 +43,28 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    _noteController.addListener(() {
-      setState(() => _note = _noteController.text);
-    });
-  }
-
-  @override
-  void dispose() {
-    _noteController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sandwich Counter')),
+      appBar: AppBar(
+        title: const Text('Sandwich Counter'),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             OrderItemDisplay(
               _quantity,
-              _selectedSize == SandwichSize.footlong ? 'Footlong' : 'Six-inch',
+              'Footlong',
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24.0,
-                vertical: 8.0,
-              ),
-              child: SegmentedButton<SandwichSize>(
-                segments: const <ButtonSegment<SandwichSize>>[
-                  ButtonSegment(
-                    value: SandwichSize.sixInch,
-                    label: Text('Six-inch'),
-                  ),
-                  ButtonSegment(
-                    value: SandwichSize.footlong,
-                    label: Text('Footlong'),
-                  ),
-                ],
-                selected: <SandwichSize>{_selectedSize},
-                onSelectionChanged: (Set<SandwichSize> newSelection) {
-                  setState(() => _selectedSize = newSelection.first);
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24.0,
-                vertical: 12.0,
-              ),
-              child: TextField(
-                controller: _noteController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Notes',
-                  hintText: 'e.g., no onions, extra pickles',
-                ),
-                keyboardType: TextInputType.text,
-              ),
-            ),
-            if (_note.isNotEmpty) Text('Current note: $_note'),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                StyledButton(
-                  onPressed: _quantity < widget.maxQuantity
-                      ? _increaseQuantity
-                      : null,
+                ElevatedButton(
+                  onPressed: _increaseQuantity,
                   child: const Text('Add'),
                 ),
-                const SizedBox(width: 12),
-                StyledButton(
-                  onPressed: _quantity > 0 ? _decreaseQuantity : null,
+                ElevatedButton(
+                  onPressed: _decreaseQuantity,
                   child: const Text('Remove'),
                 ),
               ],
@@ -143,27 +87,3 @@ class OrderItemDisplay extends StatelessWidget {
     return Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}');
   }
 }
-
-/// Small styled button used across the screen.
-class StyledButton extends StatelessWidget {
-  final VoidCallback? onPressed;
-  final Widget child;
-
-  const StyledButton({super.key, required this.onPressed, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.orange,
-        disabledBackgroundColor: Colors.grey,
-        disabledForegroundColor: Colors.orange.shade200 
-      ),
-      child: child,
-    );
-  }
-}
-
-enum SandwichSize { sixInch, footlong }
