@@ -1,7 +1,7 @@
-class PricingRepository {
+class pricing_repository {
   final double sixInchPrice;
   final double footlongPrice;
-  PricingRepository({this.sixInchPrice = 7.00, this.footlongPrice = 11.00});
+  pricing_repository({this.sixInchPrice = 7.00, this.footlongPrice = 11.00});
   double unitPrice({required bool isFootlong}) =>
       isFootlong ? footlongPrice : sixInchPrice;
 
