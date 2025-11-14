@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/views/app_styles.dart';
 import 'package:flutter_application_1/repositories/order_repository.dart';
 
- enum BreadType { white, wheat, wholemeal }
+enum BreadType { white, wheat, wholemeal }
 
 void main() {
   runApp(const App());
@@ -35,6 +35,7 @@ class _OrderScreenState extends State<OrderScreen> {
   late final OrderRepository _orderRepository;
   final TextEditingController _notesController = TextEditingController();
   bool _isFootlong = true;
+  bool _isToasted = false;
   BreadType _selectedBreadType = BreadType.white;
 
   @override
@@ -103,12 +104,7 @@ class _OrderScreenState extends State<OrderScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Sandwich Counter',
-          style: heading1,
-        ),
-      ),
+      appBar: AppBar(title: const Text('Sandwich Counter', style: heading1)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -125,10 +121,22 @@ class _OrderScreenState extends State<OrderScreen> {
               children: [
                 const Text('six-inch', style: normalText),
                 Switch(
-                  value: _isFootlong,
-                  onChanged: _onSandwichTypeChanged,
-                ),
+                  key: const Key('Sandwich Type Switch'),
+                  value: _isFootlong, onChanged: _onSandwichTypeChanged),
                 const Text('footlong', style: normalText),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('untoasted', style: normalText),
+                Switch(
+                  value: _isToasted,
+                  onChanged: (value) {
+                    setState(() => _isToasted = value);
+                  },
+                ),
+                const Text('toasted', style: normalText),
               ],
             ),
             const SizedBox(height: 10),
@@ -200,13 +208,7 @@ class StyledButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: myButtonStyle,
-      child: Row(
-        children: [
-          Icon(icon),
-          const SizedBox(width: 8),
-          Text(label),
-        ],
-      ),
+      child: Row(children: [Icon(icon), const SizedBox(width: 8), Text(label)]),
     );
   }
 }
@@ -232,15 +234,9 @@ class OrderItemDisplay extends StatelessWidget {
 
     return Column(
       children: [
-        Text(
-          displayText,
-          style: normalText,
-        ),
+        Text(displayText, style: normalText),
         const SizedBox(height: 8),
-        Text(
-          'Note: $orderNote',
-          style: normalText,
-        ),
+        Text('Note: $orderNote', style: normalText),
       ],
     );
   }
