@@ -168,4 +168,11 @@ void main() {
       expect(find.text('Note: Lots of lettuce'), findsOneWidget);
     });
   });
+  testWidgets('Switch should toggle between Six-Inch and footlong', (WidgetTester tester) async {
+    await tester.pumpWidget(const App());
+    expect(find.textContaining('footlong sandwich'), findsOneWidget);
+    await tester.tap(find.byType(Switch));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('six-inch sandwich'), findsOneWidget);
+  });
 }
