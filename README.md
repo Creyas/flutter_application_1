@@ -1,16 +1,33 @@
-# flutter_application_1
+# Sandwich Shop App
 
-A new Flutter project.
+A small Flutter app that demonstrates a simple sandwich-ordering UI and quantity counter. Users can toggle sandwich size (six‑inch / footlong), select a bread type, add order notes, and increment/decrement the item quantity with a configurable maximum.
 
-## Getting Started
+Key features
+- Increment / decrement sandwich quantity with max limit enforcement
+- Choose bread type (enum-backed) via DropdownMenu
+- Toggle sandwich size (six‑inch vs footlong)
+- Add a free-text order note
+- Widget tests included to validate UI behavior
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## Prerequisites
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter SDK (stable channel) — https://flutter.dev/docs/get-started/install  
+- Dart (bundled with Flutter)  
+- Git  
+- A development editor (Visual Studio Code or Android Studio recommended)  
+- A supported device or emulator (Android/iOS) or desktop target (Windows/Mac/Linux) if enabled
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Note: Check pubspec.yaml for exact Flutter SDK constraints and any other packages used.
+
+---
+
+## Clone & Install
+
+Open PowerShell or Command Prompt on Windows and run:
+
+```powershell
+git clone <repository-url> c:\sandwich_shop\flutter_application_1
+cd c:\sandwich_shop\flutter_application_1
+flutter pub get
