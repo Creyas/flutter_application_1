@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/views/app_styles.dart';
 import 'package:flutter_application_1/repositories/order_repository.dart';
+import 'package:flutter_application_1/repositories/Pricing_Repository.dart';
 
 enum BreadType { white, wheat, wholemeal }
 
@@ -33,6 +34,7 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   late final OrderRepository _orderRepository;
+  late final PricingRepository _pricing; 
   final TextEditingController _notesController = TextEditingController();
   bool _isFootlong = true;
   bool _isToasted = false;
@@ -42,6 +44,7 @@ class _OrderScreenState extends State<OrderScreen> {
   void initState() {
     super.initState();
     _orderRepository = OrderRepository(maxQuantity: widget.maxQuantity);
+    _pricing = PricingRepository(); 
     _notesController.addListener(() {
       setState(() {});
     });
@@ -116,13 +119,19 @@ class _OrderScreenState extends State<OrderScreen> {
               orderNote: noteForDisplay,
             ),
             const SizedBox(height: 20),
+            Text(
+              'Total: ${_pricing.formattedTotal(quantity: _orderRepository.quantity, isFootlong: _isFootlong)}',
+              style: normalText,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text('six-inch', style: normalText),
                 Switch(
                   key: const Key('Sandwich Type Switch'),
-                  value: _isFootlong, onChanged: _onSandwichTypeChanged),
+                  value: _isFootlong,
+                  onChanged: _onSandwichTypeChanged,
+                ),
                 const Text('footlong', style: normalText),
               ],
             ),
