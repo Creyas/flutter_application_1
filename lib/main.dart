@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/views/app_styles.dart';
 import 'package:flutter_application_1/repositories/order_repository.dart';
-import 'package:flutter_application_1/repositories/Pricing_Repository.dart';
+import 'package:flutter_application_1/repositories/pricing_repository.dart';
 
 enum BreadType { white, wheat, wholemeal }
 
@@ -34,7 +34,7 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   late final OrderRepository _orderRepository;
-  late final PricingRepository _pricing; 
+  late final PricingRepository _pricing;
   final TextEditingController _notesController = TextEditingController();
   bool _isFootlong = true;
   bool _isToasted = false;
@@ -44,7 +44,7 @@ class _OrderScreenState extends State<OrderScreen> {
   void initState() {
     super.initState();
     _orderRepository = OrderRepository(maxQuantity: widget.maxQuantity);
-    _pricing = PricingRepository(); 
+    _pricing = PricingRepository();
     _notesController.addListener(() {
       setState(() {});
     });
